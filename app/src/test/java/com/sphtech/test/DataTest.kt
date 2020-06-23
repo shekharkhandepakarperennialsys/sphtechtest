@@ -3,7 +3,7 @@ package com.sphtech.test
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockito_kotlin.mock
-import com.sphtech.shared.core.base.BaseRepository
+import com.sphtech.shared.core.base.BaseAPIRepository
 import com.sphtech.shared.database.SPHTechDao
 import com.sphtech.shared.database.SPHTechRoomRepository
 import com.sphtech.shared.entities.DataAmountResponse
@@ -39,22 +39,22 @@ class DataTest {
     @JvmField
     val rule = InstantTaskExecutorRule()
 
-    private lateinit var vm: HomeViewModel
+    private lateinit var homeViewModel: HomeViewModel
 
     @Mock
     private lateinit var context: Context
 
     @Mock
     var apiClient: ApiClient = mock()
-    private lateinit var repo: DataAmountRepository
-    private lateinit var factDatabaseRepository: SPHTechRoomRepository
+    private lateinit var dataAmountRepository: DataAmountRepository
+    private lateinit var sphTechRoomRepository: SPHTechRoomRepository
 
     var apiService: ApiService = mock()
-    var baseRepository: BaseRepository = mock()
-    var facts = ArrayList<RecordsData>()
+    var baseAPIRepository: BaseAPIRepository = mock()
+    var recordsDataList = ArrayList<RecordsData>()
 
     @Mock
-    lateinit var factInfoDao: SPHTechDao
+    lateinit var sphTechDao: SPHTechDao
 
     private var resourceId = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
     private var limit = 50
@@ -68,74 +68,74 @@ class DataTest {
     fun setup() {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler: Callable<Scheduler?>? -> Schedulers.trampoline() }
         context = mock(Context::class.java)
-        factDatabaseRepository = SPHTechRoomRepository(context)
+        sphTechRoomRepository = SPHTechRoomRepository(context)
         apiService.apiClient = apiClient
-        repo = DataAmountRepository(apiService, baseRepository)
-        factDatabaseRepository.SPHTechDao = factInfoDao
-        vm = HomeViewModel(context, repo)
-        vm.allList = facts
+        dataAmountRepository = DataAmountRepository(apiService, baseAPIRepository)
+        sphTechRoomRepository.sphTechDao = sphTechDao
+        homeViewModel = HomeViewModel(context, dataAmountRepository)
+        homeViewModel.allList = recordsDataList
     }
 
     @Test
     fun testDataList() {
-        assert(vm.allList.size == 0)
+        assert(homeViewModel.allList.size == 0)
     }
 
     @Test
     fun testAPICall() {
-        vm.dataAmountAPIObserver.observeForever {
+        homeViewModel.dataAmountAPIObserver.observeForever {
             assert(true)
         }
-        vm.callDataAmountAPI()
+        homeViewModel.callDataAmountAPI()
     }
 
     @Test
     fun testApi(): Unit = runBlocking {
         lenient().`when`(apiClient.callDataAmount(resourceId, limit)).thenReturn(deferred)
         lenient().`when`(deferred.await()).thenReturn(results)
-        val liveData: List<RecordsData> = vm.allList
+        val liveData: List<RecordsData> = homeViewModel.allList
         delay(5000L)
-        Assert.assertEquals(liveData, facts)
+        Assert.assertEquals(liveData, recordsDataList)
     }
 
     @Test
     fun testDBCall() {
         initDummy()
-        lenient().`when`(factDatabaseRepository.SPHTechDao?.getList())
-            .thenReturn(facts)
-        Assert.assertNotNull(vm.allList)
+        lenient().`when`(sphTechRoomRepository.sphTechDao?.getList())
+            .thenReturn(recordsDataList)
+        Assert.assertNotNull(homeViewModel.allList)
     }
 
     @Test
     fun testDBSize() {
         initDummy()
-        lenient().`when`(factDatabaseRepository.SPHTechDao?.getList())
-            .thenReturn(vm.allList)
-        Assert.assertEquals(2, vm.allList.size)
+        lenient().`when`(sphTechRoomRepository.sphTechDao?.getList())
+            .thenReturn(homeViewModel.allList)
+        Assert.assertEquals(2, homeViewModel.allList.size)
     }
 
     @Test
     fun testDBInsert() {
         initDummy()
-        lenient().`when`(factDatabaseRepository.SPHTechDao?.saveList(facts))
+        lenient().`when`(sphTechRoomRepository.sphTechDao?.saveList(recordsDataList))
             .thenReturn(null)
-        lenient().`when`(factDatabaseRepository.SPHTechDao?.getList())
-            .thenReturn(facts)
-        Assert.assertEquals(2, facts.size)
+        lenient().`when`(sphTechRoomRepository.sphTechDao?.getList())
+            .thenReturn(recordsDataList)
+        Assert.assertEquals(2, recordsDataList.size)
     }
 
     @Test
     fun testTileShown() {
         initDummy()
-        lenient().`when`(factDatabaseRepository.SPHTechDao?.getList())
-            .thenReturn(facts)
-        Assert.assertEquals("2011-Q1", vm.allList[0].quarter)
-        Assert.assertEquals("0.001", vm.allList[0].volumeOfMobileData)
+        lenient().`when`(sphTechRoomRepository.sphTechDao?.getList())
+            .thenReturn(recordsDataList)
+        Assert.assertEquals("2011-Q1", homeViewModel.allList[0].quarter)
+        Assert.assertEquals("0.001", homeViewModel.allList[0].volumeOfMobileData)
     }
 
     private fun initDummy() {
-        facts.add(RecordsData("0.001", "2011-Q1", 1))
-        facts.add(RecordsData("0.011", "2011-Q2", 2))
+        recordsDataList.add(RecordsData("0.001", "2011-Q1", 1))
+        recordsDataList.add(RecordsData("0.011", "2011-Q2", 2))
     }
 }
 

@@ -14,6 +14,4 @@ interface SPHTechDao {
 
     @Query("SELECT * from records_data")
     fun getList(): List<RecordsData>
-
-
 }

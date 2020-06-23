@@ -1,5 +1,3 @@
-
-
 package com.sphtech.shared.util
 
 import android.content.Context
@@ -7,8 +5,6 @@ import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import javax.inject.Inject
 import android.net.NetworkCapabilities
-
-
 
 /**
  * Checks if a network connection exists.

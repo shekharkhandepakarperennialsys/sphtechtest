@@ -1,5 +1,3 @@
-
-
 package com.sphtech.shared.util
 
 import android.content.Context

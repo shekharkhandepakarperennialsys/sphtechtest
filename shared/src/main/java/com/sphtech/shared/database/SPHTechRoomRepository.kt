@@ -13,11 +13,11 @@ class SPHTechRoomRepository  (application: Context) : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    var SPHTechDao: SPHTechDao?
+    var sphTechDao: SPHTechDao?
 
     init {
         val db = SPHTechDatabase.getDatabase(application)
-        SPHTechDao = db?.sphTechDao()
+        sphTechDao = db?.sphTechDao()
     }
 
     fun saveList(recordsDataList: List<RecordsData>) {
@@ -26,9 +26,9 @@ class SPHTechRoomRepository  (application: Context) : CoroutineScope {
 
     private suspend fun saveListBG(recordsDataList: List<RecordsData>){
         withContext(Dispatchers.IO){
-            SPHTechDao?.saveList(recordsDataList)
+            sphTechDao?.saveList(recordsDataList)
         }
     }
 
-    fun getList() = SPHTechDao?.getList()
+    fun getList() = sphTechDao?.getList()
 }

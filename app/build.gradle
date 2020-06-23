@@ -50,43 +50,36 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.0'
 
     implementation 'com.google.android.material:material:1.1.0'
+
     implementation 'androidx.navigation:navigation-fragment:2.2.2'
     implementation 'androidx.navigation:navigation-ui:2.2.2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
-
 
     implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$arch_version"
 
-//    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-//    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-//    implementation "com.squareup.okhttp3:okhttp:$okHttp3_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttp3_version"
 
-
     implementation "com.google.dagger:dagger:$dragger_version"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-rc01'
+    androidTestImplementation 'androidx.test:rules:1.3.0-rc01'
     kapt "com.google.dagger:dagger-compiler:$dragger_annotation_version"
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'  // manage the dimention margin
-    implementation 'com.intuit.ssp:ssp-android:1.0.6' // manage the font size
-
-
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.mikhaellopez:circularimageview:4.1.1'
-
 
     // Dagger
     implementation "com.google.dagger:dagger-android:2.16"
     implementation "com.google.dagger:dagger-android-support:2.16"
     kapt "com.google.dagger:dagger-compiler:2.16"
     kapt "com.google.dagger:dagger-android-processor:2.16"
-
 
     //Rx Dependencies
     implementation "io.reactivex.rxjava2:rxjava:2.2.8"

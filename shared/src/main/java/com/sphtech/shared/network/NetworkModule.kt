@@ -2,9 +2,8 @@ package com.sphtech.shared.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.sphtech.shared.BuildConfig
-import com.sphtech.shared.core.base.BaseRepository
+import com.sphtech.shared.core.base.BaseAPIRepository
 import com.sphtech.shared.network.repository.DataAmountRepository
-import com.sphtech.shared.network.repository.prefs.SharedPreferenceStorage
 import com.sphtech.shared.util.ConstantsBase
 import dagger.Module
 import dagger.Provides
@@ -115,6 +114,6 @@ class NetworkModule {
     @Singleton
     fun provideDataAmountRepository(
         apiService: ApiService,
-        baseRepository: BaseRepository
-    ): DataAmountRepository = DataAmountRepository(apiService, baseRepository)
+        baseAPIRepository: BaseAPIRepository
+    ): DataAmountRepository = DataAmountRepository(apiService, baseAPIRepository)
 }

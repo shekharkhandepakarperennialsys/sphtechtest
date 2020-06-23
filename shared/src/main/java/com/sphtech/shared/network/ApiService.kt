@@ -8,8 +8,10 @@ import javax.inject.Singleton
 open class ApiService @Inject constructor(
     builder: Retrofit.Builder
 ) {
+    var baseUrl = "https://data.gov.sg/"
+
     var apiClient =
-        builder.baseUrl("https://data.gov.sg/")
+        builder.baseUrl(baseUrl)
             .build()
             .create(ApiClient::class.java)
 

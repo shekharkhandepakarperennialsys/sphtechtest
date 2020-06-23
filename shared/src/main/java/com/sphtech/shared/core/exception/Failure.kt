@@ -1,5 +1,3 @@
-
-
 package com.sphtech.shared.core.exception
 
 /**
