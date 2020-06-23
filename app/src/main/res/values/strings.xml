@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SPH Tech Test</string>
+    <string name="hyphen">-</string>
+    <string name="decreased_volume">Decreased Volume</string>
+</resources>

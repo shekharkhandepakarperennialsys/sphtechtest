@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.sphtech.shared">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <application
+            android:allowBackup="true"
+            android:label="@string/app_name"
+            >
+
+<!--        &lt;!&ndash;suppress AndroidDomInspection &ndash;&gt;-->
+<!--        <activity-->
+<!--                android:name="com.ccpp.my2c2psdk.cores.My3DSActivity"-->
+<!--                android:screenOrientation="portrait"-->
+<!--                android:theme="@style/My2c2pSDK.Theme">-->
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW"/>-->
+
+<!--                <category android:name="android.intent.category.DEFAULT"/>-->
+<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
+
+<!--                &lt;!&ndash; For 123 payment : eNETS Only &ndash;&gt;-->
+<!--                &lt;!&ndash; For demo server &ndash;&gt;-->
+<!--                <data-->
+<!--                        android:host="123"-->
+<!--                        android:scheme="my2c2p764764000001136"/>-->
+<!--                &lt;!&ndash; For demo server &ndash;&gt;-->
+<!--                <data-->
+<!--                        android:host="123"-->
+<!--                        android:scheme="my2c2764764000001136"/>-->
+<!--                &lt;!&ndash; For prod server &ndash;&gt;-->
+<!--                <data-->
+<!--                        android:host="123"-->
+<!--                        android:scheme="my2c2p1001"/>-->
+<!--                &lt;!&ndash; End &ndash;&gt;-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+<!--        <activity-->
+<!--                android:name="com.ccpp.my2c2psdk.cores.OTPActivity"-->
+<!--                android:screenOrientation="portrait"-->
+<!--                android:theme="@android:style/Theme.NoTitleBar"/>-->
+
+    </application>
+
+</manifest>
