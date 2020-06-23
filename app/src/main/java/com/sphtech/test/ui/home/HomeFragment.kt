@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.sphtech.shared.core.result.EventObserver
 import com.sphtech.shared.util.viewModelProvider
 import com.sphtech.test.base.BaseFragment
 import com.sphtech.test.databinding.FragmentHomeBinding
@@ -18,6 +20,7 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var dataAmountAdapter: DataAmountAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +34,27 @@ class HomeFragment : BaseFragment() {
 
         bindRecyclerData()
 
+        homeViewModel.callDataAmountAPI()
+
+        homeViewModel.dataAmountAPIObserver.observe(viewLifecycleOwner, Observer {
+            dataAmountAdapter.dataChanged(it)
+        })
+
+        homeViewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            binding.strDataAmount.isRefreshing = it
+        })
+
+        binding.strDataAmount.setOnRefreshListener {
+            homeViewModel.allList.clear()
+            homeViewModel.callDataAmountAPI()
+        }
+
         return binding.root
     }
 
     private fun bindRecyclerData() {
+        dataAmountAdapter = DataAmountAdapter { _, _ ->
+        }
+        binding.rvDataAmount.adapter = dataAmountAdapter
     }
 }
