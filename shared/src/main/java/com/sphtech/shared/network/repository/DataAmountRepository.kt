@@ -11,10 +11,12 @@ class DataAmountRepository @Inject constructor(
     private val baseRepository: BaseRepository
 ) {
 
-    suspend fun callDataAmountAPI(resourceId:String, limit: Int): Results<DataAmountResponse> =
+    suspend fun callDataAmountAPI(resourceId:String, limit:Int): Results<DataAmountResponse> =
         baseRepository.safeApiCall(
             call = {
-                service.callDataAmountAPIAsync(resourceId, limit).await()
+                service.callDataAmountAPIAsync(
+                    resourceId ,limit
+                ).await()
             },
             errorMessage = "Error occurred"
         )

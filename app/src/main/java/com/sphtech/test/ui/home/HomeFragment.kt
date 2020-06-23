@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.sphtech.shared.entities.RecordsData
 import com.sphtech.shared.util.viewModelProvider
-
 import com.sphtech.test.base.BaseFragment
 import com.sphtech.test.databinding.FragmentHomeBinding
 import javax.inject.Inject
