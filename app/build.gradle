@@ -36,6 +36,10 @@ android {
     dataBinding {
         enabled true
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -99,6 +103,7 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin:1.6.0"
     testImplementation "org.robolectric:robolectric:4.2.1"
     testImplementation "org.amshove.kluent:kluent:1.14"
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
 
     // unit tests livedata
     testImplementation "androidx.arch.core:core-testing:2.1.0"
